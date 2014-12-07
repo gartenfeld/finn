@@ -1,5 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 @import url(http://fonts.googleapis.com/css?family=Droid+Serif);
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,100);
 
 [ng-cloak] {
   display: none !important;
@@ -55,7 +56,7 @@
 
 .fi {
 	font-size: 1.5em;
-	letter-spacing: 1105%;
+	letter-spacing: 110%;
 	margin-bottom: 4px;
 	font-family: "Droid Serif";
 }

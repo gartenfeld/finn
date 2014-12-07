@@ -16,11 +16,12 @@ var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
 var dbHost = "visitor:blank@ds063180.mongolab.com"
 var dbPort = 63180;
 
+var uri = 'mongodb://visitor:blank@ds063180.mongolab.com:63180/suomi';
+
 function getHeadword (searchString, callback) {
 
-	var db = new mongo.Db("suomi", new mongo.Server(dbHost, dbPort, {}));
-
-	db.open(function(error){
+	mongo.MongoClient.connect(uri, function(err, db) {
+	if(err) throw err;
 		db.collection("sanat", function(error, collection){
 			collection.find({ 
 				$text: { $search: searchString.toString() } 
@@ -41,9 +42,9 @@ function getHeadword (searchString, callback) {
 
 function getCitations (searchText, callback) {
 
-	var db = new mongo.Db("suomi", new mongo.Server(dbHost, dbPort, {}));
 
-	db.open(function(error){
+	mongo.MongoClient.connect(uri, function(err, db) {
+	if(err) throw err;
 		db.collection("citations", function(error, collection){
 			collection.find({ 
 				$text: { $search: searchText.toString() } 
