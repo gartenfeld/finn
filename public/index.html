@@ -15,7 +15,7 @@
     <input ng-model="query" ng-change="updateQuery()" type="text" class="search" placeholder="🐶" autofocus>
   </form>
 
-  <div id="wrapper">
+  <div ng-cloak id="wrapper">
 
     <ul class="words">
       <li class="word" ng-repeat="word in sanat">
