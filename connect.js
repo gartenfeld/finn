@@ -13,14 +13,12 @@ app.set('ipaddr', process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1");
 var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
 var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
  
-
-
-var dbHost = "127.0.0.1"
-var dbPort = mongo.Connection.DEFAULT_PORT;
+var dbHost = "visitor:blank@ds063180.mongolab.com"
+var dbPort = 63180;
 
 function getHeadword (searchString, callback) {
 
-	var db = new mongo.Db("stage", new mongo.Server(dbHost, dbPort, {}));
+	var db = new mongo.Db("suomi", new mongo.Server(dbHost, dbPort, {}));
 
 	db.open(function(error){
 		db.collection("sanat", function(error, collection){
@@ -43,7 +41,7 @@ function getHeadword (searchString, callback) {
 
 function getCitations (searchText, callback) {
 
-	var db = new mongo.Db("stage", new mongo.Server(dbHost, dbPort, {}));
+	var db = new mongo.Db("suomi", new mongo.Server(dbHost, dbPort, {}));
 
 	db.open(function(error){
 		db.collection("citations", function(error, collection){
