@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Mahtavaa!</title>
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/style.css">
+  
+</head>
+<body>
+
+<div class="main" ng-controller = "MyController">
+
+  <form>
+    <input ng-model="query" ng-change="updateQuery()" type="text" class="search" placeholder="🐶" autofocus>
+  </form>
+
+  <div id="wrapper">
+
+    <ul class="words">
+      <li class="word" ng-repeat="word in sanat">
+        <div class="headword">
+          {{word.headword}}
+        </div>
+        <ul class="senses">
+          <li class="sense" ng-repeat="sense in word.senses">
+            {{sense.full_gloss}}
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <ul class="citations">
+      <li class="citation-pair" ng-repeat="quote in quotes">
+        <div class="fi">
+          {{quote.fi}}
+        </div>
+        <div class="en">
+          {{quote.en}}
+        </div>
+      </li>
+    </ul>
+
+  </div>
+
+</body>
+
+<script src="lib/angular/angular.min.js"></script>
+<script src="js/controllers.js"></script>
+
+</html>
