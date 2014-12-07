@@ -15,10 +15,10 @@
     <input ng-model="query" ng-change="updateQuery()" type="text" class="search" placeholder="🐶" autofocus>
   </form>
 
-  <div ng-cloak id="wrapper">
+  <div id="wrapper">
 
     <ul class="words">
-      <li class="word" ng-repeat="word in sanat">
+      <li class="word" ng-repeat="word in sanat" ng-cloak>
         <div class="headword">
           {{word.headword}}
         </div>
@@ -31,7 +31,7 @@
     </ul>
 
     <ul class="citations">
-      <li class="citation-pair" ng-repeat="quote in quotes">
+      <li class="citation-pair" ng-repeat="quote in quotes" ng-cloak>
         <div class="fi">
           {{quote.fi}}
         </div>
