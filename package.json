@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node connect.js"
   },
+  "main":"connect.js",
   "dependencies": {
     "body-parser": "~1.8.1",
     "cookie-parser": "~1.3.3",
