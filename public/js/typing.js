@@ -1,3 +1,5 @@
+    var correctKey = "", 
+        timer;
 
     function loadSentence() {
       
@@ -69,7 +71,14 @@
       return str;
     };
 
-
+    function playSound() {
+      myAudio = document.getElementById('audible');
+      myAudio.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+      }, false);
+      myAudio.play();
+    };
 
     window.onkeyup = function(e) {
 
