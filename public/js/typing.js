@@ -3,9 +3,8 @@
 
     function loadSentence() {
       
-      var sentence = "He fumbled for the little phrase book he carried with him but then suddenly remembered the word.";
-      var wrappedText = wrapString(sentence, 36, "\n");
-      var lines = wrappedText.split('\n');
+      var sentence = "The library is just across the road.";
+      var wrappedText = wrapString(sentence, 36, "\n"); var lines = wrappedText.split('\n');
 
       var textLines = [];
       for (var i = 0; i < lines.length; i++) {
