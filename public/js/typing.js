@@ -1,6 +1,15 @@
     var correctKey = "", 
         timer;
 
+    function playSound() {
+      myAudio = document.getElementById('audible');
+      myAudio.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+      }, false);
+      myAudio.play();
+    };
+
     function loadSentence() {
       
       var sentence = "The library is just across the road.";
@@ -68,15 +77,6 @@
           };
       }
       return str;
-    };
-
-    function playSound() {
-      myAudio = document.getElementById('audible');
-      myAudio.addEventListener('ended', function() {
-        this.currentTime = 0;
-        this.play();
-      }, false);
-      myAudio.play();
     };
 
     window.onkeyup = function(e) {

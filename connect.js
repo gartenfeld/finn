@@ -10,13 +10,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || 8080); 
 app.set('ipaddr', process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1");
 
-var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
-var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080,
+    server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
  
-var dbHost = "visitor:blank@ds063180.mongolab.com"
-var dbPort = 63180;
+var dbUser = process.env.SUOMI_USERNAME,
+	dbPass = process.env.SUOMI_PASSWORD;
 
-var uri = 'mongodb://visitor:blank@ds063180.mongolab.com:63180/suomi';
+var dbHost = dbUser + ":" + dbPass + "@ds063180.mongolab.com",
+    dbPort = 63180;
+
+var uri = 'mongodb://' + dbHost + ':' + dbPort + '/suomi';
 
 function getHeadword (searchString, callback) {
 
