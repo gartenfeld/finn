@@ -1,8 +1,14 @@
     var correctKey = "", 
         timer;
 
+    function addLoop() {
+      looping = document.getElementById('audible');
+      looping.addEventListener('ended', playSound, false);
+    }
+
     function playSound() {
       myAudio = document.getElementById('audible');
+      myAudio.currentTime = 0;
       myAudio.play();
     };
 
@@ -80,7 +86,7 @@
       var key = e.keyCode ? e.keyCode : e.which;
   
       var pressed = String.fromCharCode(key).toLowerCase();
-      
+
       if (pressed == correctKey) {
         clearInterval(timer);
         $firstChar.attr('class', 'character apparent');
