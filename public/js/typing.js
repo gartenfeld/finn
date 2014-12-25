@@ -9,6 +9,7 @@
     function playSound() {
       myAudio = document.getElementById('audible');
       myAudio.currentTime = 0;
+      myAudio.pause();
       myAudio.play();
     };
 
