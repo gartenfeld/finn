@@ -4,6 +4,7 @@
     function addLoop() {
       looping = document.getElementById('audible');
       looping.addEventListener('ended', playSound, false);
+      looping.play()
     }
 
     function playSound() {
@@ -106,4 +107,4 @@
     if (event.keyCode === 8) {
         event.preventDefault();
     }
-});
+    });
