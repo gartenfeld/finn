@@ -1,14 +1,14 @@
     var correctKey = "", 
-        timer;
+        timer,
+        myAudio;
 
     function addLoop() {
-      looping = document.getElementById('audible');
-      looping.addEventListener('ended', playSound, false);
-      looping.play()
+      myAudio = document.getElementById('audible');
+      myAudio.addEventListener('ended', playSound, false);
+      myAudio.play()
     }
 
     function playSound() {
-      myAudio = document.getElementById('audible');
       myAudio.currentTime = 0;
       myAudio.pause();
       myAudio.play();
@@ -33,9 +33,14 @@
 
     function getFirstCharacter() {
       $firstChar = $('.character.hidden').first();
-      $firstChar.attr('class','character current');
-      correctKey = $firstChar.text().toLowerCase();
-      timer = setInterval(function() {blinker($firstChar);},2000)
+
+      if ($firstChar.length > 0) {
+        $firstChar.attr('class','character current');
+        correctKey = $firstChar.text().toLowerCase();
+        timer = setInterval(function() {blinker($firstChar);},2000)
+      } else {
+        myAudio.pause()
+      }
     };
 
     function blinker(elem) {
@@ -94,7 +99,7 @@
         $firstChar.attr('class', 'character apparent');
         getFirstCharacter();
       } else {
-          flashScreen();
+          if (key != 32) {flashScreen();}
       }
     }
 
@@ -104,7 +109,7 @@
     }
 
     $(document).unbind('keydown').bind('keydown', function (event) {
-    if (event.keyCode === 8) {
-        event.preventDefault();
-    }
+      if (event.keyCode === 8) {
+        event.preventDefault(); // This is a jQuery method, remember to load jQuery first!
+      }
     });

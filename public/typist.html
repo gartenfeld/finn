@@ -6,7 +6,6 @@
   <title>The Typist</title>
   <link rel="stylesheet" href="css/typist.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <script src="js/typing.js"></script>
   <audio id="audible" src="voice/ASDF1.ogg" preload="auto" loop onloadeddata="addLoop()"></audio>
 </head>
 
@@ -16,7 +15,6 @@
 
     <div class="sentence">
       
-
     </div>
 
   <hr/>
@@ -27,16 +25,13 @@
 
   </div>
 
-  <script src="lib/jquery-2.1.1.min.js"></script>
-  <script src="lib/jquery.color-2.1.2.min.js"></script>
-  
-
+  <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script src="http://code.jquery.com/color/jquery.color-2.1.2.min.js"></script>
+  <script src="js/typing.js"></script>
   <script>
-
-    $(document).ready( function () {
+    $(document).ready(function(){
       loadSentence();
     });
-
   </script>
 
 </body>
