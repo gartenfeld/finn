@@ -3,10 +3,6 @@
 
     function playSound() {
       myAudio = document.getElementById('audible');
-      myAudio.addEventListener('ended', function() {
-        this.currentTime = 0;
-        this.play();
-      }, false);
       myAudio.play();
     };
 
@@ -81,10 +77,10 @@
 
     window.onkeyup = function(e) {
 
-    var key = e.keyCode ? e.keyCode : e.which;
-    
+      var key = e.keyCode ? e.keyCode : e.which;
+  
       var pressed = String.fromCharCode(key).toLowerCase();
-
+      
       if (pressed == correctKey) {
         clearInterval(timer);
         $firstChar.attr('class', 'character apparent');
@@ -92,10 +88,15 @@
       } else {
           flashScreen();
       }
-    
     }
 
     function flashScreen () {
       $('html').animate({backgroundColor: "#FFC2D6"}, 50)
                .animate({backgroundColor: "transparent"}, 50);
     }
+
+    $(document).unbind('keydown').bind('keydown', function (event) {
+    if (event.keyCode === 8) {
+        event.preventDefault();
+    }
+});
