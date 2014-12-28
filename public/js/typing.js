@@ -1,24 +1,25 @@
     var correctKey = "", 
         timer,
-        myAudio;
-
-    function addLoop() {
-      myAudio = document.getElementById('audible');
-      myAudio.addEventListener('ended', playSound, false);
-      myAudio.play()
-    }
+        myAudio,
+        sentence = "The library is just across the road.";
 
     function playSound() {
       myAudio = document.getElementById('audible');
-      myAudio.currentTime = 0;
       myAudio.pause();
+      myAudio.currentTime = 0;
       myAudio.play();
     };
 
+    function addLoop() {
+      looping = document.getElementById('audible');
+      looping.addEventListener('ended', playSound, false);
+      playSound();
+    }
+
     function loadSentence() {
       
-      var sentence = "The library is just across the road.";
-      var wrappedText = wrapString(sentence, 36, "\n"); var lines = wrappedText.split('\n');
+      var wrappedText = wrapString(sentence, 36, "\n"); 
+      var lines = wrappedText.split('\n');
 
       var textLines = [];
       for (var i = 0; i < lines.length; i++) {
