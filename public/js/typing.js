@@ -18,10 +18,7 @@
         autoLoad: true,
         autoPlay: false,
         onload: function() {
-          soundManager.play('mySound');
-        },
-        onfinish: function() {
-          soundManager.play('mySound');
+          this.play({loops: 200});
         },
         volume: 50
       });
