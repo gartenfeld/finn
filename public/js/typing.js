@@ -1,12 +1,12 @@
     var correctKey = "", 
         timer,
-        init = "The library is just across the road.";
+        init = "Yes, please.";
 
     function loadSM(){
       soundManager.setup({
         url: 'swf/',
         onready: function() {
-          loadSound("voice/ASDF1.ogg");
+          loadSound("voice/NCE/C021_09.mp3");
         }
       });
     }
@@ -20,6 +20,9 @@
         autoPlay: false,
         onload: function() {
           this.play({loops: 200});
+        },
+        onfinish: function() {
+          this.play();
         },
         volume: 60
       });
@@ -35,12 +38,10 @@
         lineChars = lines[i].split('');
         dict = { "chars" : lineChars };
         textLines.push(dict);
-      };
-
+      }
       loadLetters(textLines);
       getFirstCharacter();
-
-    };
+    }
 
     function getFirstCharacter() {
       $firstChar = $('.character.hidden').first();
@@ -48,19 +49,19 @@
       if ($firstChar.length > 0) {
         $firstChar.attr('class','character current');
         correctKey = $firstChar.text().toLowerCase();
-        timer = setInterval(function() {blinker($firstChar);},2000)
+        timer = setInterval(function() {blinker($firstChar);},2000);
       } else {
-        loadAnother()
+        loadAnother();
       }
-    };
+    }
 
     function loadAnother() {
-      soundManager.pause('mySound');
+      soundManager.stop('mySound');
       soundManager.destroySound('mySound');
       var entry = items[Math.floor(Math.random()*items.length)];
-      mp3 = entry['mp3'];
-      en = entry['en'];
-      cn = entry['cn'];
+      mp3 = entry.mp3;
+      en = entry.en;
+      cn = entry.cn;
       $('.line').fadeOut(400).remove();
       $('div.translation').text(cn);
       loadSound('voice/NCE/'+mp3);
