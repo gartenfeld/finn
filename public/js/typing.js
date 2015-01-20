@@ -1,30 +1,25 @@
     var correctKey = "", 
         timer,
+        myAudio,
         init = "Yes, please.";
 
     function loadSM(){
       soundManager.setup({
         url: 'swf/',
         onready: function() {
-          loadSound("voice/NCE/C021_09.mp3");
+          soundManager.createSound({
+                  id: 'mySound',
+                  url: 'voice/NCE/C021_09.mp3',
+                  flashVersion: 9,
+                  autoLoad: false,
+                  autoPlay: false,
+                  onload: function() {
+                    this.play({loops: 200});
+                  },
+                  volume: 60
+                });
+          soundManager.load('mySound');
         }
-      });
-    }
-
-    function loadSound(source){
-      soundManager.createSound({
-        id: 'mySound',
-        url: source,
-        flashVersion: 9,
-        autoLoad: true,
-        autoPlay: false,
-        onload: function() {
-          this.play({loops: 200});
-        },
-        onfinish: function() {
-          this.play();
-        },
-        volume: 60
       });
     }
 
@@ -56,16 +51,16 @@
     }
 
     function loadAnother() {
-      soundManager.stop('mySound');
-      soundManager.destroySound('mySound');
+
       var entry = items[Math.floor(Math.random()*items.length)];
       mp3 = entry.mp3;
       en = entry.en;
       cn = entry.cn;
-      $('.line').fadeOut(400).remove();
+      $('.line').remove();
       $('div.translation').text(cn);
-      loadSound('voice/NCE/'+mp3);
+      soundManager.load('mySound',{url:'voice/NCE/'+mp3});
       loadSentence(en);
+
     }
 
     function blinker(elem) {
@@ -91,27 +86,37 @@
 
           $newChar.appendTo($newLine);
           $newChar.hide().delay(((10*l)+c)*5).fadeIn(200); 
-
-        };
-      };
-    };
+        } // char loop
+      } // line loop
+    }
 
     function checkAlpha(char) {
       return /^[a-zA-Z]$/.test(char) ? "character hidden" : "character apparent";
-    };
+    }
 
     function wrapString(str, limit, lineBreak) {
       if (str.length>limit) {
           var p=limit;
-          while (p>0 && str[p]!=' ') {p--;}; // find first space within limit
+          while (p>0 && str[p]!=' ') {p--;} // find first space within limit
           if (p>0) {
               var left = str.substring(0, p); // a compliant line
               var right = str.substring(p+1); // the remainder
               return left + lineBreak + wrapString(right, limit, lineBreak); // recursively solve the remainder
-          };
+          }
       }
       return str;
-    };
+    }
+
+    function flashScreen () {
+      $('html').animate({backgroundColor: "#FFC2D6"}, 50)
+               .animate({backgroundColor: "transparent"}, 50);
+    }
+
+    $(document).unbind('keydown').bind('keydown', function (event) {
+      if (event.keyCode === 8) {
+        event.preventDefault(); // This is a jQuery method, remember to load jQuery first!
+      }
+    });
 
     window.onkeyup = function(e) {
 
@@ -126,15 +131,4 @@
       } else {
           if (key != 32) {flashScreen();}
       }
-    }
-
-    function flashScreen () {
-      $('html').animate({backgroundColor: "#FFC2D6"}, 50)
-               .animate({backgroundColor: "transparent"}, 50);
-    }
-
-    $(document).unbind('keydown').bind('keydown', function (event) {
-      if (event.keyCode === 8) {
-        event.preventDefault(); // This is a jQuery method, remember to load jQuery first!
-      }
-    });
+    };
