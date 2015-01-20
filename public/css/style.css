@@ -79,10 +79,10 @@
 	padding-left: 30px;
 	border-style: none;
 	border-radius: 7px;
-	background-color: rgba(0,0,0,.05);
+	background-color: rgba(0,0,0,.07);
 }
 
 input:focus {
-	background   : rgba(0,0,0,.03);
+	background   : rgba(0,0,0,.04);
 	outline: none;
 }

@@ -23,16 +23,20 @@
     </div>
 
   </div>
-  
+
   <script src="lib/jquery-2.1.1.min.js"></script>
-  <script src="lib/jquery.color-2.1.2.min.js"></script>
-  <audio id="audible" src="voice/ASDF1.ogg" preload="auto" onloadeddata="addLoop()"></audio>
   <script src="js/typing.js"></script>
+  
+  <script src="lib/jquery.color-2.1.2.min.js"></script>
+  <script src="lib/soundmanager2-nodebug-jsmin.js"></script>
+  
   <script>
     $(document).ready(function(){
-      loadSentence();
+      loadSM();
+      loadSentence(init);
     });
   </script>
+  <script src="js/NCE1.js"></script>
 
 
 

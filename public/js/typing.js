@@ -1,22 +1,33 @@
     var correctKey = "", 
         timer,
-        myAudio,
-        sentence = "The library is just across the road.";
+        init = "The library is just across the road.";
 
-    function playSound() {
-      myAudio = document.getElementById('audible');
-      myAudio.pause();
-      myAudio.currentTime = 0;
-      myAudio.play();
-    };
-
-    function addLoop() {
-      looping = document.getElementById('audible');
-      looping.addEventListener('ended', playSound, false);
-      playSound();
+    function loadSM(){
+      soundManager.setup({
+        url: 'swf/',
+        onready: function() {
+          loadSound("voice/ASDF1.ogg");
+        }
+      });
     }
 
-    function loadSentence() {
+    function loadSound(source){
+      soundManager.createSound({
+        id: 'mySound',
+        url: source,
+        autoLoad: true,
+        autoPlay: false,
+        onload: function() {
+          soundManager.play('mySound');
+        },
+        onfinish: function() {
+          soundManager.play('mySound');
+        },
+        volume: 50
+      });
+    }
+
+    function loadSentence(sentence) {
       
       var wrappedText = wrapString(sentence, 36, "\n"); 
       var lines = wrappedText.split('\n');
@@ -41,9 +52,22 @@
         correctKey = $firstChar.text().toLowerCase();
         timer = setInterval(function() {blinker($firstChar);},2000)
       } else {
-        myAudio.pause()
+        loadAnother()
       }
     };
+
+    function loadAnother() {
+      soundManager.pause('mySound');
+      soundManager.destroySound('mySound');
+      var entry = items[Math.floor(Math.random()*items.length)];
+      mp3 = entry['mp3'];
+      en = entry['en'];
+      cn = entry['cn'];
+      $('.line').fadeOut(500);
+      $('div.translation').text(cn);
+      loadSound('voice/NCE/'+mp3);
+      loadSentence(en);
+    }
 
     function blinker(elem) {
         elem.fadeOut(400);
