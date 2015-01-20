@@ -11,22 +11,19 @@
                   id: 'mySound',
                   url: 'voice/NCE/C021_09.mp3',
                   flashVersion: 9,
+                  stream: true,
                   autoLoad: false,
                   autoPlay: false,
+                  volume: 60,
                   onload: function() {
-                    loopSound(this);
+                    this.stop();
+                    this.play();
                   },
-                  volume: 60
-                });
-          soundManager.load('mySound');
-        }
-      });
-    }
-
-    function loopSound(sound) {
-      sound.play({
-        onfinish: function() {
-          loopSound(sound);
+                  onfinish: function() {
+                    this.stop();
+                    this.play();
+                  }
+                }).load();
         }
       });
     }
