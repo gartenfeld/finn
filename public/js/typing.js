@@ -15,12 +15,13 @@
       soundManager.createSound({
         id: 'mySound',
         url: source,
+        flashVersion: 9,
         autoLoad: true,
         autoPlay: false,
         onload: function() {
           this.play({loops: 200});
         },
-        volume: 50
+        volume: 60
       });
     }
 
@@ -60,7 +61,7 @@
       mp3 = entry['mp3'];
       en = entry['en'];
       cn = entry['cn'];
-      $('.line').fadeOut(500);
+      $('.line').fadeOut(400).remove();
       $('div.translation').text(cn);
       loadSound('voice/NCE/'+mp3);
       loadSentence(en);
