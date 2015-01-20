@@ -35,7 +35,7 @@ items = [
 {"cn": "他是韩国人。", "en": "He's Korean.", "mp3": "C005_15.mp3"},
 {"cn": "很高兴见到你。", "en": "Nice to meet you.", "mp3": "C005_16.mp3"},
 {"cn": "这位是鲁明。", "en": "And this is Luming.", "mp3": "C005_17.mp3"},
-{"cn": "他是中国人。", "en": "He is Chinese.", "mp3": "C005_18.mp3"},
+{"cn": "他是中国人。", "en": "He's Chinese.", "mp3": "C005_18.mp3"},
 {"cn": "很高兴见到你。", "en": "Nice to meet you.", "mp3": "C005_19.mp3"},
 {"cn": "这位是晓惠。", "en": "And this is Xiaohui.", "mp3": "C005_20.mp3"},
 {"cn": "她也是中国人。", "en": "She's Chinese, too.", "mp3": "C005_21.mp3"},

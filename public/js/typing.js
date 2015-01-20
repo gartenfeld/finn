@@ -14,11 +14,19 @@
                   autoLoad: false,
                   autoPlay: false,
                   onload: function() {
-                    this.play({loops: 200});
+                    loopSound(this);
                   },
                   volume: 60
                 });
           soundManager.load('mySound');
+        }
+      });
+    }
+
+    function loopSound(sound) {
+      sound.play({
+        onfinish: function() {
+          loopSound(sound);
         }
       });
     }
