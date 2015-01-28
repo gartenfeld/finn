@@ -26,42 +26,49 @@ function getHeadword (searchString, callback) {
 
 	mongo.MongoClient.connect(uri, function(err, db) {
         if(err) throw err;
-
-		cursor = db.collection("sanat").find(
-            { $text: { $search: searchString.toString() } },
-            { 
-                sort: [['headword', 1]],
-                limit: 10
-            } );
-
-		cursor.toArray(
-			function(error, docs){
-				if (docs.length === 0) {
-					callback(false);
-				} else {
-					callback(docs);
-				} } ); // toArray callbacks
-	});
+		db.collection("sanat", function(error, collection) {
+            collection.find(
+                { $text: { $search: searchString.toString() } },
+                { 
+                    sort: [['headword', 1]],
+                    limit: 10
+                },
+                function(error, cursor){
+                    cursor.toArray(
+                        function(error, docs) {
+                            if (docs.length === 0) {
+                                callback(false);
+                                db.close();
+                            } else {
+                                callback(docs);
+                                db.close();
+                            }
+                        });
+                });
+        });
+	}); // connect
 }
 
 function getCitations (searchText, callback) {
 
 	mongo.MongoClient.connect(uri, function(err, db) {
 	   if(err) throw err;
-		db.collection("citations", function(error, collection){
+		db.collection("citations", function(error, collection) {
 			collection.find(
                 { $text: { $search: searchText.toString() } },  
                 { limit : 10 }, 
-			function(error, cursor){
-				cursor.toArray(
-					function(error, docs){
-						if (docs.length === 0) {
-							callback(false);
-						} else {
-							callback(docs);
-						}
-					});
-			});
+    			function(error, cursor){
+    				cursor.toArray(
+    					function(error, docs){
+    						if (docs.length === 0) {
+    							callback(false);
+                                db.close();
+    						} else {
+    							callback(docs);
+                                db.close();
+    						}
+    					});
+    			});
 		});
 	});
 }
