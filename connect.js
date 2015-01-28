@@ -28,8 +28,8 @@ function getHeadword (searchString, callback) {
         if(err) throw err;
 
 		cursor = db.collection("sanat").find(
-            { "headword": searchString.toString() }, 
-            { 'sort': 'headword' });
+            { $text: { $search: searchString.toString() } } 
+            ).sort( [['headword', 1]] ).limit(10);
 
 		cursor.toArray(
 			function(error, docs){
@@ -48,9 +48,9 @@ function getCitations (searchText, callback) {
 	mongo.MongoClient.connect(uri, function(err, db) {
 	if(err) throw err;
 		db.collection("citations", function(error, collection){
-			collection.find({ 
-				$text: { $search: searchText.toString() } 
-				},  { limit : 10 }, 
+			collection.find(
+                { $text: { $search: searchText.toString() } },  
+                { limit : 10 }, 
 			function(error, cursor){
 				cursor.toArray(
 					function(error, docs){
