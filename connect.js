@@ -26,7 +26,7 @@ function getHeadword (searchString, callback) {
 	mongo.MongoClient.connect(uri, function(err, db) {
         if(err) throw err;
 
-        query = { "$text": { "$search": searchString.toString() } };
+        query = { "headword": searchString.toString() };
 
 		var cursor = db.collection("sanat").find(
             query, 

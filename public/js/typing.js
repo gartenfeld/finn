@@ -49,7 +49,9 @@
         correctKey = $firstChar.text().toLowerCase();
         timer = setInterval(function() {blinker($firstChar);},2000);
       } else {
-        loadAnother();
+        soundManager.stop('mySound');
+        soundManager.play('mySound', {onfinish: loadAnother});
+        
       }
     }
 
