@@ -880,7 +880,7 @@ items = [
 {"cn": "我的法语成绩肯定很低。", "en": "I'm sure I've got a low mark.", "mp3": "C103_17.mp3"},
 {"cn": "啊，别灰心！", "en": "Oh, cheer up!", "mp3": "C103_18.mp3"},
 {"cn": "或许我们考得还不太糟。", "en": "Perhaps we didn't do too badly.", "mp3": "C103_19.mp3"},
-{"cn": "坐在我旁边的那个人只在试卷顶端写了自己的名字。", "en": "The guy next to me Wrote his name at the top of the paper.", "mp3": "C103_20.mp3"},
+{"cn": "坐在我旁边的那个人只在试卷顶端写了自己的名字。", "en": "The guy next to me wrote his name at the top of the paper.", "mp3": "C103_20.mp3"},
 {"cn": "是吗？", "en": "Yes?", "mp3": "C103_21.mp3"},
 {"cn": "然后他就坐在那里，对着考卷看了3个小时，", "en": "Then he sat there and looked at it for three hours!", "mp3": "C103_22.mp3"},
 {"cn": "一个字也没写！", "en": "He didn't write a word!", "mp3": "C103_23.mp3"},
