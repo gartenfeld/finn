@@ -19,8 +19,8 @@ var dbUser = process.env.SUOMI_USERNAME,
 var dbHost = dbUser + ":" + dbPass + "@ds063180.mongolab.com",
     dbPort = 63180;
 
-//var uri = 'mongodb://' + dbHost + ':' + dbPort + '/suomi';
-var uri = 'mongodb://localhost:27017/stage';
+var uri = 'mongodb://' + dbHost + ':' + dbPort + '/suomi';
+//var uri = 'mongodb://localhost:27017/stage';
 
 function getHeadword (searchString, callback) {
 
@@ -32,8 +32,7 @@ function getHeadword (searchString, callback) {
             { 
                 sort: [['headword', 1]],
                 limit: 10
-            } 
-        );
+            } );
 
 		cursor.toArray(
 			function(error, docs){
@@ -41,16 +40,14 @@ function getHeadword (searchString, callback) {
 					callback(false);
 				} else {
 					callback(docs);
-				}
-			}); // toArray callbacks
+				} } ); // toArray callbacks
 	});
 }
 
 function getCitations (searchText, callback) {
 
-
 	mongo.MongoClient.connect(uri, function(err, db) {
-	if(err) throw err;
+	   if(err) throw err;
 		db.collection("citations", function(error, collection){
 			collection.find(
                 { $text: { $search: searchText.toString() } },  
@@ -89,7 +86,6 @@ app.get('/full/:search', function (req, res) {
 		}
 	});
 }); 
-
 
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
@@ -132,5 +128,5 @@ app.use(function(err, req, res, next) {
 module.exports = app;
 
 var server = app.listen(server_port, server_ip_address, function () {
-    console.log("Visit: " + server_ip_address + ':' + server_port);
+    console.log("Running at " + server_ip_address + ':' + server_port);
 });
