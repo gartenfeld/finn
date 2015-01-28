@@ -20,17 +20,16 @@ var dbHost = dbUser + ":" + dbPass + "@ds063180.mongolab.com",
     dbPort = 63180;
 
 var uri = 'mongodb://' + dbHost + ':' + dbPort + '/suomi';
+//var uri = 'mongodb://localhost:27017/stage';
 
 function getHeadword (searchString, callback) {
 
 	mongo.MongoClient.connect(uri, function(err, db) {
         if(err) throw err;
 
-        query = { "headword": searchString.toString() };
-
-		var cursor = db.collection("sanat").find(
-            query, 
-            { '$sort': 'headword' });
+		cursor = db.collection("sanat").find(
+            { "headword": searchString.toString() }, 
+            { 'sort': 'headword' });
 
 		cursor.toArray(
 			function(error, docs){
@@ -129,5 +128,5 @@ app.use(function(err, req, res, next) {
 module.exports = app;
 
 var server = app.listen(server_port, server_ip_address, function () {
-
+    console.log("Visit: " + server_ip_address + ':' + server_port);
 });
