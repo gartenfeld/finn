@@ -58,7 +58,7 @@
       if (repeated === 0) {
         var new_entry = items[Math.floor(Math.random()*items.length)];
         twice = new_entry;
-        repeated += 1;
+        // repeated += 1;
       } else {
         repeated = 0;
       }

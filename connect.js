@@ -4,7 +4,7 @@ var path = require('path');
 
 var app = express();
 
-app.set('view engine', 'jade')
+app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || 8080); 
@@ -24,24 +24,24 @@ var uri = 'mongodb://' + dbHost + ':' + dbPort + '/suomi';
 function getHeadword (searchString, callback) {
 
 	mongo.MongoClient.connect(uri, function(err, db) {
-	if(err) throw err;
-		db.collection("sanat", function(error, collection){
-			collection.find({ 
-				$text: { $search: searchString.toString() } 
-				},  { "limit" : 10 , "sort" : "headword"}, 
-			function(error, cursor){
-				cursor.toArray(
-					function(error, docs){
-						if (docs.length == 0) {
-							callback(false);
-						} else {
-							callback(docs);
-						}
-					});
-			});
-		});
+        if(err) throw err;
+
+        query = { "$text": { "$search": searchString.toString() } };
+
+		var cursor = db.collection("sanat").find(
+            query, 
+            { '$sort': 'headword' });
+
+		cursor.toArray(
+			function(error, docs){
+				if (docs.length === 0) {
+					callback(false);
+				} else {
+					callback(docs);
+				}
+			}); // toArray callbacks
 	});
-};
+}
 
 function getCitations (searchText, callback) {
 
@@ -55,7 +55,7 @@ function getCitations (searchText, callback) {
 			function(error, cursor){
 				cursor.toArray(
 					function(error, docs){
-						if (docs.length == 0) {
+						if (docs.length === 0) {
 							callback(false);
 						} else {
 							callback(docs);
@@ -64,7 +64,7 @@ function getCitations (searchText, callback) {
 			});
 		});
 	});
-};
+}
 
 
 app.get('/sana/:query', function (req, res) {
@@ -129,5 +129,5 @@ app.use(function(err, req, res, next) {
 module.exports = app;
 
 var server = app.listen(server_port, server_ip_address, function () {
-  console.log( "Listening on " + server_ip_address + ", server_port " + server_port )
+
 });
