@@ -29,12 +29,12 @@ function getHeadword (searchString, callback) {
 		db.collection("sanat", function(error, collection) {
             collection.find(
                 { $text: { $search: searchString.toString() } },
-                { 
-                    sort: [['headword', 1]],
-                    limit: 10
-                },
+                { 'score': { '$meta': 'textScore' } },
                 function(error, cursor){
-                    cursor.toArray(
+                    cursor
+                    .sort({ score: { $meta: "textScore" } })
+                    .limit(10)
+                    .toArray(
                         function(error, docs) {
                             if (docs.length === 0) {
                                 callback(false);
