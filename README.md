@@ -1,4 +1,1 @@
-hello
-=====
-
-Demo: http://finn-rosson.rhcloud.com
+Finnish-English Dictionary
