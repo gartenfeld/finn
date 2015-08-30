@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node server.js"
+    "start": "node server/server.js"
   },
-  "main": "server.js",
+  "main": "server/server.js",
   "dependencies": {
     "express": "~4.9.0",
     "mongodb": "^1.4.23",
