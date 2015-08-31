@@ -1,4 +1,4 @@
-var mongo = require('mongodb');
+var mongo = require('mongodb').MongoClient;
 
 var dbUser = process.env.SUOMI_USERNAME,
     dbPass = process.env.SUOMI_PASSWORD,
@@ -9,45 +9,33 @@ var dbUser = process.env.SUOMI_USERNAME,
 var models = {};
 
 models.getHeadword = function (searchString, callback) {
-
-  mongo.MongoClient.connect(uri, function(err, db) {
-  if(err) throw err;
-    db.collection("sanat", function(error, collection){
-      collection.find({ 
-        $text: { $search: searchString.toString() } 
-        },  { "limit" : 10 , "sort" : "headword"}, 
-      function(error, cursor){
-        cursor.toArray(
-          function(error, docs){
-            if (docs.length === 0) {
-              callback(false);
-            } else {
+  mongo.connect(uri, function (err, db) {
+    db.collection("sanat", function (err, collection) {
+      collection.find(
+        { $text: { $search: searchString.toString() } },  
+        { limit : 10, sort : "headword" }, 
+        function (err, cursor) {
+          cursor.toArray(
+            function (err, docs) {
               callback(docs);
-            }
-          });
-      });
+            });
+        });
     });
   });
 };
 
 models.getCitations = function (searchText, callback) {
-
-  mongo.MongoClient.connect(uri, function(err, db) {
-  if(err) throw err;
-    db.collection("citations", function(error, collection){
-      collection.find({ 
-        $text: { $search: searchText.toString() } 
-        },  { limit : 10 }, 
-      function(error, cursor){
-        cursor.toArray(
-          function(error, docs){
-            if (docs.length === 0) {
-              callback(false);
-            } else {
+  mongo.connect(uri, function (err, db) {
+    db.collection("citations", function (err, collection) {
+      collection.find(
+        { $text: { $search: searchText.toString() } },  
+        { limit : 10 }, 
+        function (err, cursor) {
+          cursor.toArray(
+            function (err, docs) {
               callback(docs);
-            }
-          });
-      });
+            });
+        });
     });
   });
 };

@@ -1,18 +1,17 @@
-var myApp = angular.module('myApp', []);
-
-myApp.controller('MyController', ['$scope', '$http', function($scope, $http) {
-
-	$scope.updateQuery= function() {
-
-		if ($scope.query != "") {
-	        $http.get('http://finn-rosson.rhcloud.com/sana/' + $scope.query).success(function(data) {
-				$scope.sanat = data;
+angular.module('myApp', [])
+	.controller('MyController', ['$scope', '$http', function ($scope, $http) {
+		var host = 'http://finn-rosson.rhcloud.com/';
+		$scope.updateQuery = function () {
+			if ($scope.query.trim() !== "") {
+	      $http.get(host + 'sana/' + $scope.query)
+	       	.success(function (data) {
+						$scope.sanat = data;
 	  			});
-	  		$http.get('http://finn-rosson.rhcloud.com/full/' + $scope.query).success(function(data) {
-	    		$scope.quotes = data;
+	  		$http.get(host + 'full/' + $scope.query)
+	  			.success(function(data) {
+	    			$scope.quotes = data;
 	  			});
-  		};
+  		}
     };
-
 }]);
 

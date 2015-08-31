@@ -1,6 +1,8 @@
     var correctKey = "", 
         timer,
         myAudio,
+        twice,
+        repeated = 0,
         init = "Yes, please.";
 
     function loadSM(){
@@ -47,13 +49,22 @@
         correctKey = $firstChar.text().toLowerCase();
         timer = setInterval(function() {blinker($firstChar);},2000);
       } else {
-        loadAnother();
+        soundManager.stop('mySound');
+        soundManager.play('mySound', {onfinish: loadAnother});
+        
       }
     }
 
     function loadAnother() {
 
-      var entry = items[Math.floor(Math.random()*items.length)];
+      if (repeated === 0) {
+        var new_entry = items[Math.floor(Math.random()*items.length)];
+        twice = new_entry;
+        // repeated += 1;
+      } else {
+        repeated = 0;
+      }
+      entry = twice;
       mp3 = entry.mp3;
       en = entry.en;
       cn = entry.cn;
