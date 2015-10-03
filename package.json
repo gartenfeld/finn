@@ -1,6 +1,6 @@
 {
-  "name": "hello",
-  "version": "0.0.0",
+  "name": "Finn",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node server/server.js"
