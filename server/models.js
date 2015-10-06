@@ -10,17 +10,14 @@ var models = {};
 
 models.getHeadword = function (searchString, callback) {
   mongo.connect(uri, function (err, db) {
-    db.collection("sanat", function (err, collection) {
-      collection.find(
-        { $text: { $search: searchString.toString() } },  
-        { limit : 10, sort : "headword" }, 
-        function (err, cursor) {
-          cursor.toArray(
-            function (err, docs) {
-              callback(docs);
-            });
+    db.collection("sanat").find(
+      { $text: { $search: searchString.toString() } },  
+      { limit : 10, sort : "headword" }, 
+      function (err, cursor) {
+        cursor.toArray(function (err, docs) {
+          callback(docs);
         });
-    });
+      });
   });
 };
 
