@@ -6,11 +6,7 @@ var mongo = require('mongodb').MongoClient;
 //     dbPort = 63180,
 //     uri = 'mongodb://' + dbHost + ':' + dbPort + '/suomi';
 
-var uri = '127.6.192.2:27017/finn';
-var dbUser = process.env.SUOMI_USERNAME,
-    dbPass = process.env.SUOMI_PASSWORD;
-
-uri = 'mongodb://' + dbUser + ':' + dbPass + '@' + uri;
+var uri = process.env.OPENSHIFT_MONGODB_DB_URL;
 
 var models = {};
 
