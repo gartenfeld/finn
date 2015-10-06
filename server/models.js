@@ -2,8 +2,8 @@ var mongo = require('mongodb').MongoClient;
 
 var dbUser = process.env.SUOMI_USERNAME,
     dbPass = process.env.SUOMI_PASSWORD,
-    dbHost = dbUser + ":" + dbPass + "@ds063180.mongolab.com",
-    dbPort = 63180,
+    dbHost = dbUser + ":" + dbPass + "@ds043037.mongolab.com",
+    dbPort = 43037,
     uri = 'mongodb://' + dbHost + ':' + dbPort + '/suomi';
 
 var models = {};
