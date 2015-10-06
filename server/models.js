@@ -6,7 +6,7 @@ var mongo = require('mongodb').MongoClient;
 //     dbPort = 63180,
 //     uri = 'mongodb://' + dbHost + ':' + dbPort + '/suomi';
 
-var uri = '127.0.0.1:27017/finn';
+var uri = '127.6.192.2:27017/finn';
 // if OPENSHIFT env variables are present, use the available connection info:
 if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
   uri = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
