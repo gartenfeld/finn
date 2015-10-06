@@ -8,9 +8,10 @@ var mongo = require('mongodb').MongoClient;
 
 var dbUser = process.env.SUOMI_USERNAME,
     dbPass = process.env.SUOMI_PASSWORD,
-    dbHost = dbUser + ":" + dbPass + "@" + 'localhost',
+    dbHost = '127.6.192.2' || 'localhost',
     dbPort = process.env.OPENSHIFT_MONGODB_DB_PORT || 27017,
-    uri = 'mongodb://' + dbHost + ':' + dbPort + '/finn';
+    uri = 'mongodb://' + dbUser + ":" + dbPass + "@" + 
+      dbHost + ':' + dbPort + '/finn';
 
 var models = {};
 
