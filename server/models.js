@@ -1,12 +1,10 @@
 var mongo = require('mongodb').MongoClient;
 
-// var dbUser = process.env.SUOMI_USERNAME,
-//     dbPass = process.env.SUOMI_PASSWORD,
-//     dbHost = dbUser + ":" + dbPass + "@ds063180.mongolab.com",
-//     dbPort = 63180,
-//     uri = 'mongodb://' + dbHost + ':' + dbPort + '/suomi';
-
-var uri = process.env.OPENSHIFT_MONGODB_DB_URL;
+var dbUser = process.env.SUOMI_USERNAME,
+    dbPass = process.env.SUOMI_PASSWORD,
+    dbHost = dbUser + ":" + dbPass + "@ds063180.mongolab.com",
+    dbPort = 63180,
+    uri = 'mongodb://' + dbHost + ':' + dbPort + '/suomi';
 
 var models = {};
 
