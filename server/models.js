@@ -2,11 +2,13 @@ var mongo = require('mongodb').MongoClient;
 
 var dbUser = process.env.SUOMI_USERNAME,
     dbPass = process.env.SUOMI_PASSWORD,
-    dbHost = dbUser + ":" + dbPass + "@ds043037.mongolab.com",
+    dbCred = dbUser + ':' + dbPass + '@',
+    dbHost = 'ds043037.mongolab.com',
     dbPort = 43037,
-    uri = 'mongodb://' + dbHost + ':' + dbPort + '/suomi';
+    uri = 'mongodb://' + dbCred + dbHost + ':' + dbPort + '/suomi';
 
 var db;
+
 mongo.connect(uri, function (err, pool) {
   db = pool;
 });
@@ -26,8 +28,8 @@ models.getHeadword = function (query, callback) {
       { limit: 10, sort: "headword" }, 
       function (err, cursor) {
         cursor.toArray(function (err, docs) {
-          wordCache[query] = docs;
           callback(docs);
+          wordCache[query] = docs;
         });
       });
   }
@@ -43,8 +45,8 @@ models.getCitations = function (query, callback) {
       { limit : 10 }, 
       function (err, cursor) {
         cursor.toArray(function (err, docs) {
-          textCache[query] = docs;
           callback(docs);
+          textCache[query] = docs;
         });
       });
   }
