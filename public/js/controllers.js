@@ -1,7 +1,7 @@
 angular.module('myApp', [])
 	.controller('MyController', ['$scope', '$http', function ($scope, $http) {
 		var host = 'http://finn-rosson.rhcloud.com/';
-		$scope.updateQuery = function () {
+		var _update = window.debounce(function() {
 			if ($scope.query.trim() !== "") {
 	      $http.get(host + 'sana/' + $scope.query)
 	       	.success(function (data) {
@@ -12,6 +12,7 @@ angular.module('myApp', [])
 	    			$scope.quotes = data;
 	  			});
   		}
-    };
+    }, 200);
+		$scope.update = _update;
 }]);
 
