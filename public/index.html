@@ -10,14 +10,15 @@
 
 <div class="main" ng-controller = "MyController">
 
-  <form>
-    <input ng-model="query" ng-change="update()" type="text" class="search" placeholder="…" autofocus>
+  <form id="search-bar">
+    <div id="caret"></div>
+    <input ng-model="query" ng-change="update()" type="text" id="search" placeholder="" autofocus>
   </form>
 
   <div id="wrapper" ng-cloak>
 
     <ul class="words">
-      <li class="word" ng-repeat="word in sanat" >
+      <li class="word-pair" ng-repeat="word in sanat" >
         <div class="headword">
           {{word.headword}}
         </div>
@@ -46,5 +47,7 @@
 
 <script src="lib/lodash/debounce.min.js"></script>
 <script src="js/controllers.js"></script>
+<script src="js/caret.js"></script>
+
 
 </html>
