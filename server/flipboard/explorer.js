@@ -35,7 +35,7 @@ Explorer.prototype.go = function(x, y) {
     };
     me.team.publish();
 
-    if (!me.team.finished) {
+    if (!me.team.finished && paths.length) {
       var first = paths.shift();
       paths.forEach(function(next) {
         var buddy = new Explorer(me.team);
