@@ -15,6 +15,10 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/sana/:query', api.findWord); 
-app.get('/full/:query', api.findText); 
+app.get('/full/:query', api.findText);
+
+var puzzle = require('./flipboard/maze');
+app.get('/maze/new', puzzle.init);
+app.get('/maze/update/:id', puzzle.update);
 
 app.listen(port, ip);
