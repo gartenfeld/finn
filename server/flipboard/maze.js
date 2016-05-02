@@ -17,7 +17,14 @@ Maze.init = function(req, res) {
 
 Maze.update = function(req, res) {
   var maze = req.params.id;
-  var team = teams[maze] = teams[maze] || new Team(maze);
+  if (!teams[maze]) {
+    teams[maze] = new Team(maze);
+    var timer = setTimeout(function() {
+      delete teams[maze];
+      clearTimeout(timer);
+    }, 120000);
+  }
+  var team = teams[maze];
   team.subscribe(res.json.bind(res));
 };
 
