@@ -9,6 +9,15 @@ var dbUser = process.env.SUOMI_USERNAME,
 
 var db;
 
+var CACHE_TIMEOUT = 300000;
+
+var clearCachedItem = function(cache, query) {
+  var timer = setTimeout(function() {
+    delete cache[query];
+    clearTimeout(timer);
+  }, CACHE_TIMEOUT);
+};
+
 mongo.connect(uri, function (err, pool) {
   db = pool;
 });
@@ -30,6 +39,7 @@ models.getHeadword = function (query, callback) {
         cursor.toArray(function (err, docs) {
           callback(docs);
           wordCache[query] = docs;
+          clearCachedItem(wordCache, query);
         });
       });
   }
@@ -47,6 +57,7 @@ models.getCitations = function (query, callback) {
         cursor.toArray(function (err, docs) {
           callback(docs);
           textCache[query] = docs;
+          clearCachedItem(textCache, query);
         });
       });
   }
