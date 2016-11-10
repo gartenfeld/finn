@@ -13,6 +13,7 @@ angular.module('finn', [])
 				.success(function(data) {
 				  $scope.quotes = data;
 				});
+			window.ga('send', 'event', 'Query', 'Entered', query);
 		}
 		$scope.update = window.debounce(_fetchData, DEBOUNCE_WAIT);
   }]);
