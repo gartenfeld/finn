@@ -9,7 +9,7 @@
   "dependencies": {
     "cors": "2.7.1",
     "express": "4.9.0",
-    "mongodb": "2.0.45",
+    "mongodb": "2.2.11",
     "serve-favicon": "2.1.3"
   }
 }
