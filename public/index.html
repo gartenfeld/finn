@@ -1,30 +1,26 @@
 <!doctype html>
-<html lang="en" ng-app="myApp">
-<head>
-  <meta charset="UTF-8">
-  <title>Mahtavaa!</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="lib/angular/angular.min.js"></script>
-</head>
-<body>
-
-<div class="main" ng-controller = "MyController">
-
-  <form id="search-bar">
-    <div id="caret"></div>
-    <input ng-model="query" ng-change="update()" type="text" id="search" placeholder="" autofocus>
-  </form>
-
-  <div id="wrapper" ng-cloak>
-
-    <ul class="words">
-      <li class="word-pair" ng-repeat="word in sanat" >
-        <div class="headword">
-          {{word.headword}}
-        </div>
-        <ul class="senses">
-          <li class="sense" ng-repeat="sense in word.senses">
-            {{sense.full_gloss}}
+<html lang="en" ng-app="finn">
+  <head>
+    <meta charset="UTF-8">
+    <title>Mahtavaa!</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="lib/angular/angular.min.js"></script>
+  </head>
+  <body>
+    <div ng-controller="appController">
+      <div id="search-bar">
+        <div id="caret"></div>
+        <input ng-model="query" ng-change="update()" id="search" type="text" placeholder="" autofocus>
+      </div>
+      <div id="results" ng-cloak>
+        <ul class="words">
+          <li class="word-pair" ng-repeat="word in sanat" >
+            <div class="headword">{{word.headword}}</div>
+            <ul class="senses">
+              <li ng-repeat="sense in word.senses">
+                <div class="sense">{{sense.full_gloss}}</div>
+              </li>
+            </ul>
           </li>
         </ul>
       </li>
