@@ -9,7 +9,7 @@ var dbUser = process.env.SUOMI_USERNAME,
 
 var db;
 
-var CACHE_TIMEOUT = 300000;
+var CACHE_TIMEOUT = 30 * 1000;
 
 var clearCachedItem = function(cache, query) {
   var timer = setTimeout(function() {
