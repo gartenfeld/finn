@@ -1,36 +1,31 @@
 var mongo = require('mongodb').MongoClient;
 var uri = require('./uri');
 
-var db;
+// @return {<Promise>}
+var connection = mongo.connect(uri);
 
-mongo.connect(uri, function (err, pool) {
-  db = pool;
-});
+function getQueryParams(query) {
+  return {
+    $text: {
+      $search: query
+    }
+  };
+}
 
-var models = {};
+function makeQueryHandler(collectionName, limits) {
+  return function(query) {
+    var queryParams = getQueryParams(query);
+    return connection.then(function(db) {
+      return db.collection(collectionName)
+        .find(queryParams, limits).toArray();
+    });
+  };
+}
 
-models.getHeadword = function (query, callback) {
-  query = query.toString();
-  db.collection("sanat").find(
-    { $text: { $search: query } },
-    { limit: 10, sort: "headword" },
-    function (err, cursor) {
-      cursor.toArray(function (err, docs) {
-        callback(docs);
-      });
-  });
+var getHeadwords = makeQueryHandler('sanat', { limit: 10 });
+var getSentences = makeQueryHandler('citations', { limit : 10 });
+
+module.exports = {
+  word: getHeadwords,
+  text: getSentences
 };
-
-models.getCitations = function (query, callback) {
-  query = query.toString();
-  db.collection("citations").find(
-    { $text: { $search: query } },
-    { limit : 10 },
-    function (err, cursor) {
-      cursor.toArray(function (err, docs) {
-        callback(docs);
-      });
-  });
-};
-
-module.exports = models;

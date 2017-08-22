@@ -1,17 +1,15 @@
 var models = require('./models');
 
-var api = {};
+function getData(model) {
+  return function(req, res) {
+    var query = String(req.params.query);
+    return models[model](query).then(docs => {
+      return res.status(200).json(docs);
+    });
+  };
+}
 
-api.findWord = function (req, res) {
-  models.getHeadword(req.params.query, function (docs) {
-    res.status(200).json(docs);
-  });
+module.exports = {
+  word: getData('word'),
+  text: getData('text')
 };
-
-api.findText = function (req, res) {
-  models.getCitations(req.params.query, function (docs) {
-    res.status(200).json(docs);
-  });
-};
-
-module.exports = api;

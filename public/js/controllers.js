@@ -16,11 +16,11 @@ angular.module('finn', [])
       if (!query) { return; }
       var queryId = Number(new Date());
       latestQueryId = queryId;
-      $http.get(HOST + 'sana/' + query)
+      $http.get(HOST + 'word/' + query)
         .success(function(data) {
           _setResults(queryId, 'sanat', data);
         });
-      $http.get(HOST + 'full/' + query)
+      $http.get(HOST + 'text/' + query)
         .success(function(data) {
           _setResults(queryId, 'quotes', data);
         });

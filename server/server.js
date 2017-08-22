@@ -14,8 +14,8 @@ app.set('ipaddr', ip);
 app.use(cors());
 app.use(express.static(path.join(__dirname, '../public')));
 
-app.get('/sana/:query', api.findWord); 
-app.get('/full/:query', api.findText);
+app.get('/word/:query', api.word);
+app.get('/text/:query', api.text);
 
 var puzzle = require('./flipboard/maze');
 app.get('/maze/new', puzzle.init);
