@@ -1,11 +1,12 @@
 var mongo = require('mongodb').MongoClient;
 
-var dbUser = process.env.SUOMI_USERNAME,
-    dbPass = process.env.SUOMI_PASSWORD,
-    dbCred = dbUser + ':' + dbPass + '@',
-    dbHost = 'ds043037.mongolab.com',
-    dbPort = 43037,
-    uri = 'mongodb://' + dbCred + dbHost + ':' + dbPort + '/suomi';
+var DB_USER = process.env.SUOMI_USERNAME;
+var DB_PASS = process.env.SUOMI_PASSWORD;
+var DB_PREFIX = DB_USER + ':' + DB_PASS + '@';
+var DB_HOST = 'ds043037.mongolab.com';
+var DB_PORT = 43037;
+var DB_NAME = 'suomi';
+var DB_URI = 'mongodb://' + DB_PREFIX + DB_HOST + ':' + DB_PORT + '/' + DB_NAME;
 
 var db;
 
@@ -18,7 +19,7 @@ var clearCachedItem = function(cache, query) {
   }, CACHE_TIMEOUT);
 };
 
-mongo.connect(uri, function (err, pool) {
+mongo.connect(DB_URI, function (err, pool) {
   db = pool;
 });
 
