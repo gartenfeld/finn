@@ -8,7 +8,6 @@ var app = express();
 var port = process.env.PORT || 8080;
 
 app.set('port', port); 
-app.set('ipaddr', ip);
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, '../public')));
