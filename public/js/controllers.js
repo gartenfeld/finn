@@ -1,7 +1,7 @@
 angular.module('finn', [])
   .controller('appController', ['$scope', '$http', function ($scope, $http) {
     var HOST = 'https://suom.herokuapp.com/';
-    var DEBOUNCE_WAIT = 250;
+    var DEBOUNCE_WAIT = 400;
     var logQuery = window.debounce(function _logQuery(query) {
       window.ga('send', 'event', 'Query', 'Entered', query);
     }, DEBOUNCE_WAIT * 5);

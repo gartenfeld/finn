@@ -8,8 +8,9 @@ var mongoOptions = {
 }
 
 var client = new MongoClient(uri, mongoOptions);
-
 var connection = client.connect();
+
+var queryOptions = { limit: 10 };
 
 function getQueryParams(query) {
   return {
@@ -19,18 +20,23 @@ function getQueryParams(query) {
   };
 }
 
-function makeQueryHandler(collectionName, limits) {
+
+
+function makeQueryHandler(collectionName) {
   return function(query) {
     var queryParams = getQueryParams(query);
-    return connection.then(function(db) {
-      return db.collection(collectionName)
-        .find(queryParams, limits).toArray();
+    return connection.then(function () {
+      return client
+        .db()
+        .collection(collectionName)
+        .find(queryParams, queryOptions)
+        .toArray();
     });
   };
 }
 
-var getHeadwords = makeQueryHandler('sanat', { limit: 10 });
-var getSentences = makeQueryHandler('citations', { limit : 10 });
+var getHeadwords = makeQueryHandler('sanat');
+var getSentences = makeQueryHandler('citations');
 
 module.exports = {
   word: getHeadwords,
