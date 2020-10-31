@@ -1,8 +1,15 @@
-var mongo = require('mongodb').MongoClient;
+
+var MongoClient = require('mongodb').MongoClient;
 var uri = require('./uri');
 
-// @return {<Promise>}
-var connection = mongo.connect(uri);
+var mongoOptions = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}
+
+var client = new MongoClient(uri, mongoOptions);
+
+var connection = client.connect();
 
 function getQueryParams(query) {
   return {
